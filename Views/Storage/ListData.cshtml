@@ -1,0 +1,63 @@
+﻿@using azuresolution1.Models
+@model dynamic
+@{
+    ViewData["Title"] = "Stored Data";
+}
+
+<h1>Stored Data</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Customer Profiles</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.Customers != null)
+                {
+                    @foreach (var customer in (List<CustomerProfile>)ViewBag.Customers)
+                    {
+                        <tr>
+                            <td>@customer.CustomerName</td>
+                            <td>@customer.Email</td>
+                            <td>@customer.PhoneNumber</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Product Information</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.Products != null)
+                {
+                    @foreach (var product in (List<ProductInfo>)ViewBag.Products)
+                    {
+                        <tr>
+                            <td>@product.ProductName</td>
+                            <td>@product.ProductDescription</td>
+                            <td>@product.Price</td>
+                            <td>@product.StockQuantity</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

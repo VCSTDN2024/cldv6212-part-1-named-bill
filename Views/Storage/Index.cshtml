@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Storage Operations";
+}
+
+<h1>Azure Storage Operations</h1>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Add Customer Profile</h2>
+        <form asp-controller="Storage" asp-action="AddCustomer" method="post">
+            <div class="form-group">
+                <label for="CustomerName">Customer Name:</label>
+                <input type="text" name="CustomerName" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="Email">Email:</label>
+                <input type="email" name="Email" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number:</label>
+                <input type="tel" name="PhoneNumber" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Add Customer</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Add Product</h2>
+        <form asp-controller="Storage" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="ProductName">Product Name:</label>
+                <input type="text" name="ProductName" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="ProductDescription">Description:</label>
+                <textarea name="ProductDescription" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Price">Price:</label>
+                <input type="number" step="0.01" name="Price" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="StockQuantity">Stock Quantity:</label>
+                <input type="number" name="StockQuantity" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="Image">Product Image:</label>
+                <input type="file" name="image" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Add Product</button>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Process Order (Azure Queue)</h2>
+        <p>This will send a message to the queue. Check your console for messages.</p>
+        <form asp-controller="Storage" asp-action="ProcessOrder" method="post">
+            <div class="form-group">
+                <label for="customerId">Customer ID (e.g., GUID):</label>
+                <input type="text" name="customerId" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="productId">Product ID (e.g., GUID):</label>
+                <input type="text" name="productId" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-warning mt-2">Send Order to Queue</button>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2>Upload Dummy Contract (Azure Files)</h2>
+        <form asp-controller="Storage" asp-action="UploadContract" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="contract">Dummy Contract File:</label>
+                <input type="file" name="contract" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-info mt-2">Upload Contract</button>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+<div class="text-center mt-4">
+    <a asp-controller="Storage" asp-action="ListData" class="btn btn-success">View All Stored Data</a>
+</div>
